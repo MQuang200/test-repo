@@ -16,7 +16,7 @@ public class Box {
 
     // Initialize a new Box object
     public static Box getInstance(int inputHeight, int inputWidth) {
-        if (object == null) {
+        if (object = null) {
             object = new Box(inputHeight, inputWidth);
         }
         return object;
