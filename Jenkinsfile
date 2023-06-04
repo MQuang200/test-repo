@@ -55,23 +55,18 @@ pipeline {
     }
   }
   post {
-    failure {
+    always {
+            script {
+                def branch = env.BRANCH_NAME.replace("origin/", "")
+                echo "Building branch: ${branch}"
+        }
         emailext (
-        attachLog: true, 
-        subject: "Build Failed: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-        body: "The build failed. Please check the logs for more information.",
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+            to: 'bmquang.iuswt@gmail.com',
+            subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            body: "Check the attached report.",
+            attachLog: true,
+            attachmentsPattern: '**.txt' // replace with your file path pattern
         )
     }
-    success {
-        sh 'ls'
-        // copyArtifacts filter: 'Questions.txt', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER)
-        emailext (
-        attachmentsPattern: 'Questions.txt',
-        subject: "Build Successful: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-        body: "The build was successful. The file has been transferred to the host.",
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
-        )
-    }
-  }
+}
 }
