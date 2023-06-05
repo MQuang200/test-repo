@@ -59,13 +59,13 @@ pipeline {
             script {
                 def branch = env.BRANCH_NAME.replace("origin/", "")
                 def email = branch.split("-")[0];
-            emailext (
-                to: 'bmquang.iuswt@gmail.com',
-                subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                body: "Check the attached report.",
-                attachLog: true,
-                attachmentsPattern: '**.txt' // replace with your file path pattern
-            )
+                emailext (
+                    to: email,
+                    subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                    body: "Check the attached report.",
+                    attachLog: true,
+                    attachmentsPattern: '**.txt' // replace with your file path pattern
+                )
         }
     }
   }
