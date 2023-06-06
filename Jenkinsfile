@@ -28,6 +28,7 @@ pipeline {
         git url: 'https://github.com/quang2652001/test-repo.git', branch: 'main'
         script {
           env.id = env.BRANCH_NAME.replace("origin/", "").split("-")[0]
+          env.email = env.BRANCH_NAME.replace("origin/", "").split("-")[1]
         }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
@@ -64,7 +65,7 @@ pipeline {
             def email = env.BRANCH_NAME.replace("origin/", "").split("-")[1]
           
             emailext (
-                to: email,
+                to: env.email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: true,
@@ -75,7 +76,7 @@ pipeline {
         success {
           script {
             emailext (
-                to: email,
+                to: env.email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: false,
