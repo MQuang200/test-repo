@@ -52,9 +52,10 @@ pipeline {
             mkdir -p "$directory_name/artifact"
             #copy all the source of student to this directory
             cp ./*.java "$directory_name"
+            javac -d "$directory_name/artifact" $directory_name*.java
+            ls "$directory_name"
+            ls "$directory_name/artifact"
           '''
-          sh 'mkdir -p /mnt/data/artifact'
-          sh 'javac -d /mnt/data/artifact /mnt/data/source-code/*.java'
           sh 'java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar'
           sh 'cp /mnt/data/artifact/Questions.txt .'
           sh 'ls'
