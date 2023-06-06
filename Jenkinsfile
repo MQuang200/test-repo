@@ -50,8 +50,8 @@ pipeline {
             # Create new directory
             directory_name="$parent_dir/$prefix-$new_index"
             mkdir "$directory_name"
+            cp ./*.java "$directory_name"
           '''
-          sh 'pwd'
           sh 'cp ./*.java "/mnt/data/$directory_name"'
           sh 'mkdir -p /mnt/data/artifact'
           sh 'javac -d /mnt/data/artifact /mnt/data/source-code/*.java'
