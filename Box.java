@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Box {
     private final int width;
     private final int height;
-    private static Bo object = null;
+    private static Box object = null;
     private String maps[][];
 
     // Implement Singleton design pattern
