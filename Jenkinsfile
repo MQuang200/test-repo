@@ -27,11 +27,11 @@ pipeline {
       steps {
         git url: 'https://github.com/quang2652001/test-repo.git', branch: 'main'
         script {
-          def id = env.BRANCH_NAME.replace("origin/", "").split("-")[0]
+          env.id = env.BRANCH_NAME.replace("origin/", "").split("-")[0]
         }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
-          sh 'echo "ID ${id}"'
+          sh 'echo "ID ${env.id}"'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
           sh 'cp ./*.java /mnt/data/source-code'
