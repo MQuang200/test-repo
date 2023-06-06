@@ -55,20 +55,19 @@ pipeline {
     }
   }
   post {
-    always {
-      script {
+    script {
         def branch = env.BRANCH_NAME.replace("origin/", "")
         def email = branch.split("-")[1];
-      }
-      failure {
+    }
+    failure {
         emailext (
           to: email,
           subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
           body: "Check the attached report.",
           attachLog: true,
         )
-      }
-      success {
+    }
+    success {
         emailext (
             to: email,
             subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
@@ -76,7 +75,6 @@ pipeline {
             attachLog: false,
             attachmentsPattern: "**.txt"
         )
-      }
     }
   }
 }
