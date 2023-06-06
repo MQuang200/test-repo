@@ -31,7 +31,7 @@ pipeline {
         }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
-          sh 'echo "${env.BRANCH_NAME}"'
+          sh 'echo ${env.BRANCH_NAME}'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
           sh 'cp ./*.java /mnt/data/source-code'
