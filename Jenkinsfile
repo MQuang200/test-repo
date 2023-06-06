@@ -71,7 +71,7 @@ pipeline {
       steps {
         container('java') {
           sh '''
-            cd /mnt/data/${id}'*' && java Lab2/Main 3
+            cd /mnt/data/${id}* && java Lab2/Main 3
           '''
         }
       }
@@ -80,8 +80,8 @@ pipeline {
       steps {
         container('java') {
           sh '''
-            java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar --path /mnt/data/${id}'*'
-            cat /mnt/data/${id}'*'/artifact/Questions.txt
+            java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar --path /mnt/data/${id}*
+            cat /mnt/data/${id}*/artifact/Questions.txt
           '''
         }
       }
