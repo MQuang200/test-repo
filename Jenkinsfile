@@ -48,12 +48,11 @@ pipeline {
             fi
 
             # Create new directory
-            mkdir "$parent_dir/$prefix-$new_index"
+            directory_name="$parent_dir/$prefix-$new_index"
+            mkdir "$directory_name"
           '''
-          sh 'echo "ID ${id}"'
           sh 'pwd'
-          sh 'mkdir -p /mnt/data/source-code'
-          sh 'cp ./*.java /mnt/data/source-code'
+          sh 'cp ./*.java /mnt/data/"$directory_name"'
           sh 'mkdir -p /mnt/data/artifact'
           sh 'javac -d /mnt/data/artifact /mnt/data/source-code/*.java'
           sh 'java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar'
