@@ -32,6 +32,7 @@ pipeline {
         git url: 'https://github.com/quang2652001/test-repo.git', branch: 'main'
         container('java') {
         //   sh 'ls /mnt/data/artifact'
+          sh 'echo ${ID}'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
           sh 'cp ./*.java /mnt/data/source-code'
@@ -61,7 +62,7 @@ pipeline {
   post {
         failure {
             emailext (
-                to: "${EMAIL}",
+                to: ${EMAIL},
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: true,
@@ -70,7 +71,7 @@ pipeline {
 
         success {
             emailext (
-                to: "${EMAIL}",
+                to: ${EMAIL},
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: false,
