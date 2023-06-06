@@ -49,10 +49,10 @@ pipeline {
 
             # Create new directory
             directory_name="$parent_dir/$prefix-$new_index"
-            mkdir "$directory_name"
+            mkdir "$directory_name/artifact"
+            #copy all the source of student to this directory
             cp ./*.java "$directory_name"
           '''
-          sh 'cp ./*.java "/mnt/data/$directory_name"'
           sh 'mkdir -p /mnt/data/artifact'
           sh 'javac -d /mnt/data/artifact /mnt/data/source-code/*.java'
           sh 'java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar'
@@ -66,6 +66,14 @@ pipeline {
                 archiveArtifacts 'Questions.txt'
             }
         }
+    }
+    stage('Test stage') {
+      steps {
+        container('java') {
+          sh 'pwd'
+          sh 'cd /mnt/data/artifact && java Lab2/Main 3'
+        }
+      }
     }
     stage('Run stage') {
       steps {
