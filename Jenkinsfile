@@ -71,18 +71,18 @@ pipeline {
       steps {
         container('java') {
           sh '''
-            cd "/mnt/data/${id}*"
+            cd /mnt/data/${id}'*' && java Lab2/Main 3
           '''
-          sh 'pwd'
-          sh 'cd /mnt/data/artifact && java Lab2/Main 3'
         }
       }
     }
-    stage('Run stage') {
+    stage('Analyzer stage') {
       steps {
         container('java') {
-          sh 'pwd'
-          sh 'cd /mnt/data/artifact && java Lab2/Main 3'
+          sh '''
+            java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar --path /mnt/data/${id}'*'
+            cat /mnt/data/${id}'*'/artifact/Questions.txt
+          '''
         }
       }
     }
