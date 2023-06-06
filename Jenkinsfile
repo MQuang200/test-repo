@@ -71,7 +71,7 @@ pipeline {
       steps {
         container('java') {
           sh '''
-            cd /mnt/data/${id}* && java Lab2/Main 3
+            cd /mnt/data/${id}*/artifact && java Lab2/Main 3
           '''
         }
       }
