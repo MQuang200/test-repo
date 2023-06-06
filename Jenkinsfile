@@ -32,6 +32,24 @@ pipeline {
         }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
+          sh '''
+            parent_dir="/mnt/data"
+            prefix="${env.id}"
+
+            # Find the maximum existing index
+            max_index=$(ls -d $parent_dir/$prefix-* 2>/dev/null | sed "s|$parent_dir/$prefix-||" | sort -nr | head -n1)
+
+            # If no existing index, start from 1, otherwise increment the index
+            if [ -z "$max_index" ]; then
+                new_index=1
+            else
+                new_index=$((max_index + 1))
+                rm -rf "$parent_dir/$prefix-$max_index"
+            fi
+
+            # Create new directory
+            mkdir "$parent_dir/$prefix-$new_index"
+          '''
           sh 'echo "ID ${id}"'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
