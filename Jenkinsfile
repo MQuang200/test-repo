@@ -22,17 +22,16 @@ pipeline {
         '''
     }
   }
-  parameters {
-    string(name: 'ID', defaultValue: "${env.BRANCH_NAME.replace("origin/", "").split("-")[0]}", description: 'The ID from the branch name')
-    string(name: 'EMAIL', defaultValue: "${env.BRANCH_NAME.replace("origin/", "").split("-")[1]}", description: 'The email from the branch name')
-  }
   stages {
     stage('Build stage') {
       steps {
         git url: 'https://github.com/quang2652001/test-repo.git', branch: 'main'
+        script {
+          def id = env.BRANCH_NAME.replace("origin/", "").split("-")[1]
+        }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
-          sh 'echo ${ID}'
+          sh 'echo ${id}'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
           sh 'cp ./*.java /mnt/data/source-code'
@@ -61,8 +60,11 @@ pipeline {
   }
   post {
         failure {
+          script {
+          def email = env.BRANCH_NAME.replace("origin/", "").split("-")[1]
+          }
             emailext (
-                to: "${EMAIL}",
+                to: "${email}",
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: true,
@@ -71,7 +73,7 @@ pipeline {
 
         success {
             emailext (
-                to: "${EMAIL}",
+                to: "${email}",
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: false,
