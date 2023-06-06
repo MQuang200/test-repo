@@ -80,7 +80,7 @@ pipeline {
       steps {
         container('java') {
           sh '''
-            java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar --path /mnt/data/${id}*
+            java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar /mnt/data/${id}*
             cat /mnt/data/${id}*/artifact/Questions.txt
           '''
         }
