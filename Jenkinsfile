@@ -58,7 +58,7 @@ pipeline {
     always {
             script {
                 def branch = env.BRANCH_NAME.replace("origin/", "")
-                def email = branch.split("-")[0];
+                def email = branch.split("-")[1];
                 emailext (
                     to: email,
                     subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
