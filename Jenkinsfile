@@ -31,7 +31,7 @@ pipeline {
         }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
-          sh 'echo "ID ${env.id}"'
+          sh 'echo "ID ${id}"'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
           sh 'cp ./*.java /mnt/data/source-code'
