@@ -31,7 +31,7 @@ pipeline {
         }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
-          sh 'echo ${env.BRANCH_NAME}'
+          sh 'ID ${id}'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
           sh 'cp ./*.java /mnt/data/source-code'
@@ -62,7 +62,6 @@ pipeline {
         failure {
           script {
             def email = env.BRANCH_NAME.replace("origin/", "").split("-")[1]
-            sh 'echo ${email}'
           }
             emailext (
                 to: "${email}",
