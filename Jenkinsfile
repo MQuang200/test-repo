@@ -103,6 +103,10 @@ pipeline {
 
         success {
           script {
+            sh '''
+              cd /mnt/data
+              ls
+            '''
             emailext (
                 to: env.email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
