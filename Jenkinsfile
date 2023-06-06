@@ -81,7 +81,7 @@ pipeline {
         container('java') {
           sh '''
             java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar /mnt/data/${id}*
-            cat /mnt/data/${id}*/artifact/Questions.txt
+            cp /mnt/data/${id}*/artifact/Questions.txt .
           '''
         }
       }
@@ -110,9 +110,9 @@ pipeline {
             emailext (
                 to: env.email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                body: "Check the attached report.",
+                body: "Check the attached questions.",
                 attachLog: false,
-                attachmentsPattern: "**.txt"
+                attachmentsPattern: "Questions.txt"
             )
           }
         }
