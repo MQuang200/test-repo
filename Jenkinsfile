@@ -52,7 +52,7 @@ pipeline {
             mkdir -p "$directory_name/artifact"
             #copy all the source of student to this directory
             cp ./*.java "$directory_name"
-            javac -d "$directory_name/artifact" $directory_name*.java
+            javac -d "$directory_name/artifact" $directory_name/*.java
             ls "$directory_name"
             ls "$directory_name/artifact"
           '''
