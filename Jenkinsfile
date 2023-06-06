@@ -49,7 +49,7 @@ pipeline {
 
             # Create new directory
             directory_name="$parent_dir/$prefix-$new_index"
-            mkdir "$directory_name/artifact"
+            mkdir -p "$directory_name/artifact"
             #copy all the source of student to this directory
             cp ./*.java "$directory_name"
           '''
