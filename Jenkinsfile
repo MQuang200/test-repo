@@ -56,17 +56,27 @@ pipeline {
   }
   post {
     always {
-            script {
-                def branch = env.BRANCH_NAME.replace("origin/", "")
-                def email = branch.split("-")[1];
-                emailext (
-                    to: email,
-                    subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                    body: "Check the attached report.",
-                    attachLog: true,
-                    attachmentsPattern: '**.txt' // replace with your file path pattern
-                )
-        }
+      script {
+        def branch = env.BRANCH_NAME.replace("origin/", "")
+        def email = branch.split("-")[1];
+      }
+      failure {
+        emailext (
+          to: email,
+          subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: "Check the attached report.",
+          attachLog: true,
+        )
+      }
+      success {
+        emailext (
+            to: email,
+            subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            body: "Check the attached report.",
+            attachLog: false,
+            attachmentsPattern: "**.txt"
+        )
+      }
     }
   }
 }
