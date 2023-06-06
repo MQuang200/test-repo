@@ -52,7 +52,7 @@ pipeline {
             mkdir "$directory_name"
           '''
           sh 'pwd'
-          sh 'cp ./*.java /mnt/data/$directory_name'
+          sh 'cp ./*.java "/mnt/data/$directory_name"'
           sh 'mkdir -p /mnt/data/artifact'
           sh 'javac -d /mnt/data/artifact /mnt/data/source-code/*.java'
           sh 'java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar'
