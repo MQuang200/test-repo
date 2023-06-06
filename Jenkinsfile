@@ -31,7 +31,7 @@ pipeline {
         }
         container('java') {
         //   sh 'ls /mnt/data/artifact'
-          sh 'ID ${id}'
+          sh 'echo "ID ${id}"'
           sh 'pwd'
           sh 'mkdir -p /mnt/data/source-code'
           sh 'cp ./*.java /mnt/data/source-code'
@@ -64,7 +64,7 @@ pipeline {
             def email = env.BRANCH_NAME.replace("origin/", "").split("-")[1]
           }
             emailext (
-                to: "${email}",
+                to: email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: true,
@@ -73,7 +73,7 @@ pipeline {
 
         success {
             emailext (
-                to: "${email}",
+                to: email",
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: false,
