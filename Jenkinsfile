@@ -25,16 +25,6 @@ pipeline {
   stages {
     stage('Build stage') {
       steps {
-        script {
-            def branch = env.BRANCH_NAME.replace("origin/", "")
-            def parts = branch.split('_')
-            if (parts.size() == 2) {
-            env.id = parts[0]
-            env.email = parts[1]
-        } else {
-            error("Invalid branch name: ${env.BRANCH_NAME}")
-            }
-        }
         git url: 'https://github.com/quang2652001/test-repo.git', branch: 'main'
         container('java') {
         //   sh 'ls /mnt/data/artifact'
