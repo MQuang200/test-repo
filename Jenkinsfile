@@ -61,11 +61,11 @@ pipeline {
 //           sh 'ls /mnt/data/artifact'
         }
       }
-      post {
-            always {
-                archiveArtifacts 'Questions.txt'
-            }
-        }
+//       post {
+//             always {
+//                 archiveArtifacts 'Questions.txt'
+//             }
+//         }
     }
     stage('Test stage') {
       steps {
