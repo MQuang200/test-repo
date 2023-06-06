@@ -90,8 +90,6 @@ pipeline {
   post {
         failure {
           script {
-            def email = env.BRANCH_NAME.replace("origin/", "").split("-")[1]
-          
             emailext (
                 to: env.email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
@@ -103,10 +101,6 @@ pipeline {
 
         success {
           script {
-            sh '''
-              cd /mnt/data
-              ls
-            '''
             emailext (
                 to: env.email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
