@@ -55,10 +55,10 @@ pipeline {
             ls /mnt/data/${id}*
             javac -d "$directory_name/artifact" $directory_name/*.java
           '''
-          sh 'java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar'
-          sh 'cp /mnt/data/artifact/Questions.txt .'
-          sh 'ls'
-          sh 'ls /mnt/data/artifact'
+//           sh 'java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar'
+//           sh 'cp /mnt/data/artifact/Questions.txt .'
+//           sh 'ls'
+//           sh 'ls /mnt/data/artifact'
         }
       }
       post {
