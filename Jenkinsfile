@@ -32,6 +32,7 @@ pipeline {
         container('java') {
         //   sh 'ls /mnt/data/artifact'
           sh '''
+            ls
             parent_dir="/mnt/data"
             prefix="${id}"
 
