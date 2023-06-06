@@ -22,6 +22,10 @@ pipeline {
         '''
     }
   }
+  parameters {
+    string(name: 'ID', defaultValue: "${env.BRANCH_NAME.replace("origin/", "").split("-")[0]}", description: 'The ID from the branch name')
+    string(name: 'EMAIL', defaultValue: "${env.BRANCH_NAME.replace("origin/", "").split("-")[1], description: 'The email from the branch name')
+  }
   stages {
     stage('Build stage') {
       steps {
@@ -57,7 +61,7 @@ pipeline {
   post {
         failure {
             emailext (
-                to: env.email,
+                to: "${EMAIL}",
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: true,
@@ -66,7 +70,7 @@ pipeline {
 
         success {
             emailext (
-                to: env.email,
+                to: "${EMAIL}",
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: false,
