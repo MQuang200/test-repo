@@ -34,7 +34,7 @@ pipeline {
         //   sh 'ls /mnt/data/artifact'
           sh '''
             parent_dir="/mnt/data"
-            prefix="${env.id}"
+            prefix="${id}"
 
             # Find the maximum existing index
             max_index=$(ls -d $parent_dir/$prefix-* 2>/dev/null | sed "s|$parent_dir/$prefix-||" | sort -nr | head -n1)
