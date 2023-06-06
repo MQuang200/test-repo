@@ -52,9 +52,8 @@ pipeline {
             mkdir -p "$directory_name/artifact"
             #copy all the source of student to this directory
             cp ./*.java "$directory_name"
+            ls "/mnt/data/${id}*"
             javac -d "$directory_name/artifact" $directory_name/*.java
-            ls "$directory_name"
-            ls "$directory_name/artifact"
           '''
           sh 'java -jar /mnt/data/analyzer-lca-spring-0.0.1-SNAPSHOT.jar'
           sh 'cp /mnt/data/artifact/Questions.txt .'
@@ -71,6 +70,9 @@ pipeline {
     stage('Test stage') {
       steps {
         container('java') {
+          sh '''
+            cd "/mnt/data/${id}*"
+          '''
           sh 'pwd'
           sh 'cd /mnt/data/artifact && java Lab2/Main 3'
         }
