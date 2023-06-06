@@ -73,7 +73,7 @@ pipeline {
 
         success {
             emailext (
-                to: email",
+                to: email,
                 subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check the attached report.",
                 attachLog: false,
