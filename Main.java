@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]) {
+        int a = 4;
         int numberOfTrials;
         if (args.length > 0) {
         // Receive input for the iterations
