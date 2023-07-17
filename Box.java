@@ -3,7 +3,7 @@ package Lab2;
 import java.util.ArrayList;
 
 public class Box {
-    private final in width;
+    private final int width;
     private final int height;
     private static Box object = null;
     private String maps[][];
