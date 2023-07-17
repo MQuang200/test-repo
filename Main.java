@@ -6,6 +6,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String args[]) {
         int numberOfTrials;
+        while (1) {
+            System.out.println("test");
+        }
         if (args.length > 0) {
         // Receive input for the iterations
             numberOfTrials = Integer.parseInt(args[0]);
