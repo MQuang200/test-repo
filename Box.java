@@ -14,7 +14,7 @@ public class Box {
         width = inputWidth;
     }
 
-    while (1) {
+    while (1==1) {
         System.out.print("test");
     }
 
