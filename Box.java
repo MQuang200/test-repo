@@ -6,6 +6,7 @@ public class Box {
     private final int width;
     private final int height;
     private static Box object = null;
+    private String test;
     private String maps[][];
 
     // Implement Singleton design pattern
