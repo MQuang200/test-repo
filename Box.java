@@ -14,6 +14,10 @@ public class Box {
         width = inputWidth;
     }
 
+    while (1) {
+        System.out.print("test");
+    }
+
     // Initialize a new Box object
     public static Box getInstance(int inputHeight, int inputWidth) {
         if (object == null) {
