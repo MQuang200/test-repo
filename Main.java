@@ -16,7 +16,9 @@ public class Main {
             System.out.println("Type the iteration(s) you want to do:");
       }
         Scanner sc = new Scanner(System.in);
-
+        while (1==1) {
+            System.out.println("This is for testing infinite loops");
+        }
         // Initialize a new Box with given height and width
         Box myBox = Box.getInstance(10, 20);
         Particle.setBound(myBox);
